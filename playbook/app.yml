@@ -17,6 +17,10 @@
        name: docker-py
        state: latest
 
+   - name: Restart Docker
+     service: name=docker state=restarted
+     become: yes
+
    - name: Pull default Docker image
      become: yes
      docker_image:
@@ -32,6 +36,7 @@
        ports:
          - "3000:3000"
        state: started
+
 
   handlers:
    - name: Start Docker
