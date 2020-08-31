@@ -1,17 +1,18 @@
-#terraform-ansible-juiceshop-example
+# terraform-ansible-juiceshop-example
 
 This repo contain terraform and ansible code to provtion environment 
 
 
-##Requirements 
+## Requirements 
 - ansible >= 2.8.5 should be installed.
 - terraform >= 0.13.0 should be installed.
 - aws account
 
-##Steps to provition application 
+## Steps to provition application 
 
-1. Generate ssh key using below command.
+### 1. Generate ssh key using below command.
 
+```
 ssh-keygen
 Generating public/private rsa key pair.
 Enter file in which to save the key (~/.ssh/id_rsa):
@@ -25,8 +26,11 @@ The key's randomart image is:
 +---[RSA 2048]----+
 ....
 +----[SHA256]-----+
+```
 
-2. Run terraform script 
+### 2. Run terraform script 
+
+```
 terraform  init
 terraform  plan 
 terraform apply -auto-approve
@@ -44,6 +48,7 @@ aws_key_pair.sshkey: Refreshing state... [id=sshkey]
 aws_vpc.main: Refreshing state... [id=XXXXXXXXXXX]
 aws_subnet.main-private-1: Refreshing state... [id=XXXXXXXXXXXX]
 ....
+```
 
 ## Terraform Variables
 
