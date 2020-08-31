@@ -1,7 +1,11 @@
-# terraform-ansible-juiceshop-example
+# aws-juiceshop-app-tf
 
-This repo contain terraform and ansible code to provtion environment 
-
+This repo contain terraform and ansible code to provision a environment with below components in AWS.
+- VPC
+- Security Group
+- Nginx
+- Application (juiceshop app)
+- ELB
 
 ## Requirements 
 - ansible >= 2.8.5 should be installed.
