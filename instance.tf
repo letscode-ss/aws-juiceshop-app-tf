@@ -3,7 +3,7 @@
 resource "aws_instance" "app" {
   ami             = "${lookup(var.AMIS, var.AWS_REGION)}"
   instance_type   = "t2.micro"
-  key_name        = "${aws_key_pair.deploykey.key_name}"
+  key_name        = "${aws_key_pair.sshkey.key_name}"
   count           = "${var.app_instance_count}"
 
   # the VPC subnet
@@ -42,7 +42,7 @@ resource "aws_instance" "app" {
 resource "aws_instance" "web" {
   ami             = "${lookup(var.AMIS, var.AWS_REGION)}"
   instance_type   = "t2.micro"
-  key_name        = "${aws_key_pair.deploykey.key_name}"
+  key_name        = "${aws_key_pair.sshkey.key_name}"
   count           = "${var.web_instance_count}"
 
   # the VPC subnet
