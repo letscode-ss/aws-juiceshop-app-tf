@@ -1,7 +1,4 @@
-resource "aws_key_pair" "deploykey" {
-  key_name   = "deploykey"
-  public_key = "${file("${var.PATH_PUBLICKEY}")}"
-}
+
 
 resource "aws_instance" "backend" {
   ami             = "${lookup(var.AMIS, var.AWS_REGION)}"

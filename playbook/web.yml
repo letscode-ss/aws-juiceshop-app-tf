@@ -15,10 +15,13 @@
      become: yes
      template: src=nginx.conf.j2 dest=/etc/nginx/nginx.conf owner=root group=root
      notify:
-      - Start Nginx
+      - Restart Nginx
 
 
   handlers:
    - name: Start Nginx
      service: name=nginx state=started
+     become: yes
+   - name: Restart Nginx
+     service: name=nginx state=restart
      become: yes
