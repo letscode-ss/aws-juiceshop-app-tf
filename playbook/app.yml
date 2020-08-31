@@ -10,7 +10,13 @@
      become: yes
      notify:
       - Start Docker
-    
+
+   - name: Install docker-py
+     become: yes
+     pip:
+       name: docker-py
+       state: latest
+
    - name: Pull default Docker image
      become: yes
      docker_image:

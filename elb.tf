@@ -1,7 +1,7 @@
 resource "aws_elb" "main-elb" {
-  name            = "main-elb"
+  name            = "${var.project_name}-elb"
   subnets         = [aws_subnet.main-public-1.id]
-  security_groups = [aws_security_group.elb-securitygroup.id]
+  security_groups = [aws_security_group.main-elb-sg.id]
   listener {
     instance_port     = 80
     instance_protocol = "http"
@@ -16,11 +16,14 @@ resource "aws_elb" "main-elb" {
     interval            = 30
   }
 
+  #number_of_instances = "${var.web_instance_count}"
+  #instances           = "${aws_instance.web.*.public_ip}"
+
   cross_zone_load_balancing   = true
   connection_draining         = true
   connection_draining_timeout = 400
   tags = {
-    Name = "main-elb"
+    Name = "${var.project_name}-elb"
   }
 }
 

@@ -5,6 +5,12 @@ variable "AWS_SECRET_KEY" {}
 variable "AWS_REGION" {
   default = "us-east-1"
 }
+variable "project_name" {}
+
+variable "web_instance_count" {}
+
+variable "app_instance_count" {}
+
 variable "PATH_PUBLICKEY" {
   default = "~/.ssh/id_rsa.pub"
 }

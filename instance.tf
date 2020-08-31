@@ -1,16 +1,16 @@
 
 
-resource "aws_instance" "backend" {
+resource "aws_instance" "app" {
   ami             = "${lookup(var.AMIS, var.AWS_REGION)}"
   instance_type   = "t2.micro"
   key_name        = "${aws_key_pair.deploykey.key_name}"
-  count = 2
+  count           = "${var.app_instance_count}"
 
   # the VPC subnet
   subnet_id = aws_subnet.main-public-1.id
 
   # the security group
-  vpc_security_group_ids = [aws_security_group.allow-traffic.id]
+  vpc_security_group_ids = [aws_security_group.main-sg.id]
 
   /* Enable this if you don't want to use Ansible
   provisioner "file" {
@@ -32,24 +32,24 @@ resource "aws_instance" "backend" {
   */
 
   tags = {
-    Name = "backend.${count.index}"
+    Name = "${var.project_name}-app-${count.index}"
     tier = "app"
   }
 
 }
 
 
-resource "aws_instance" "frontend" {
+resource "aws_instance" "web" {
   ami             = "${lookup(var.AMIS, var.AWS_REGION)}"
   instance_type   = "t2.micro"
   key_name        = "${aws_key_pair.deploykey.key_name}"
-  count = 2
+  count           = "${var.web_instance_count}"
 
   # the VPC subnet
   subnet_id = aws_subnet.main-public-1.id
 
   # the security group
-  vpc_security_group_ids = [aws_security_group.allow-traffic.id]
+  vpc_security_group_ids = [aws_security_group.main-sg.id]
 
   /* Enable this if you don't want to use Ansible
 
@@ -72,7 +72,7 @@ resource "aws_instance" "frontend" {
   */
 
   tags = {
-    Name = "frontend.${count.index}"
+    Name = "${var.project_name}-web-${count.index}"
     tier = "app"
   }
 }

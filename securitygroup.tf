@@ -1,6 +1,6 @@
-resource "aws_security_group" "allow-traffic" {
+resource "aws_security_group" "main-sg" {
   vpc_id      = aws_vpc.main.id
-  name        = "allow-traffic"
+  name        = "${var.project_name}-sg"
   description = "security group that allows ssh and all egress traffic"
   egress {
     from_port   = 0
@@ -31,14 +31,14 @@ resource "aws_security_group" "allow-traffic" {
   }
 
   tags = {
-    Name = "allow-traffic"
+    Name = "${var.project_name}-sg"
   }
 }
 
 
-resource "aws_security_group" "elb-securitygroup" {
+resource "aws_security_group" "main-elb-sg" {
   vpc_id      = aws_vpc.main.id
-  name        = "elb"
+  name        = "${var.project_name}-elb-sg"
   description = "security group for load balancer"
   egress {
     from_port   = 0
@@ -54,7 +54,7 @@ resource "aws_security_group" "elb-securitygroup" {
     cidr_blocks = ["0.0.0.0/0"]
   }
   tags = {
-    Name = "elb"
+    Name = "${var.project_name}-elb-sg"
   }
 }
 
