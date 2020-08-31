@@ -1,0 +1,24 @@
+---
+- hosts: web
+  tasks:
+   - name: upgrade all packages
+     yum: name=* state=latest
+     become: yes
+
+   - name: Install Nginx
+     yum: pkg=nginx state=installed update_cache=true
+     become: yes
+     notify:
+      - Start Nginx
+      
+   - name: Update config
+     become: yes
+     template: src=nginx.conf.j2 dest=/etc/nginx/nginx.conf owner=root group=root
+     notify:
+      - Start Nginx
+
+
+  handlers:
+   - name: Start Nginx
+     service: name=nginx state=started
+     become: yes

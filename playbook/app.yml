@@ -1,0 +1,33 @@
+---
+- hosts: app
+  tasks:
+   - name: upgrade all packages
+     yum: name=* state=latest
+     become: yes
+
+   - name: Install Docker
+     yum: pkg=docker state=installed update_cache=true
+     become: yes
+     notify:
+      - Start Docker
+    
+   - name: Pull default Docker image
+     become: yes
+     docker_image:
+       name: "bkimminich/juice-shop"
+       source: pull
+
+   - name: Create application containers
+     become: yes
+     docker_container:
+       name: "juice-shop"
+       image: "bkimminich/juice-shop"
+       detach: true
+       ports:
+         - "3000:3000"
+       state: started
+
+  handlers:
+   - name: Start Docker
+     service: name=docker state=started
+     become: yes
