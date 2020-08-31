@@ -52,7 +52,15 @@ aws_key_pair.sshkey: Refreshing state... [id=sshkey]
 aws_vpc.main: Refreshing state... [id=XXXXXXXXXXX]
 aws_subnet.main-private-1: Refreshing state... [id=XXXXXXXXXXXX]
 ....
+Outputs:
+
+ELB = sptest-elb-XXXXXXXXXX.us-east-1.elb.amazonaws.com
+......
 ```
+
+### 3. Now appliication should be accessible from ELB URL
+
+![app snapshot](./docs/app-snapshot.png "app snapshot")
 
 ## Terraform Variables
 

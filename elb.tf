@@ -18,7 +18,9 @@ resource "aws_elb" "main-elb" {
 
   #number_of_instances = "${var.web_instance_count}"
   #instances           = "${aws_instance.web.*.id}"
-  #instances                   =  element(aws_instance.web.*.id, count.index)
+  #count = length(data.aws_subnet_ids.public.ids)
+
+  instances                   =    aws_instance.web.*.id
   cross_zone_load_balancing   = true
   connection_draining         = true
   connection_draining_timeout = 400
